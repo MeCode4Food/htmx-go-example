@@ -1,0 +1,44 @@
+<html>
+
+<head>
+  <title>Pages of Cats</title>
+  <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+  <h1>{{ .PageTitle }}</h1>
+  <p>Page content</p>
+  <button hx-get="/cats/create" hx-target="#replaceMe" hx-swap="innerHTML" class="btn btn-primary">Create Cat</button>
+  <div id="replaceMe"></div>
+  <div hx-get="/cats" hx-trigger="load">
+    <hx-swap-oob>
+      <tr>
+        <td>Loading...</td>
+      </tr>
+    </hx-swap-oob>
+  </div>
+  
+</body>
+<style>
+  .htmx-settling {
+    display: none;
+  }
+</style>
+<script>
+  // adding dialogOpen and dialogClose because
+  // currently, HTMLDialogElement <dialog> is not properly supported by htmx
+  // it needs dialog.showModal() and dialog.close() JS functions to support its functionalities
+  // This can be resolved using htmx-trigger-* headers in the response
+  document.body.addEventListener("dialogOpen", function(evt){
+    var dialogID = evt.detail.value;
+    var dialog = document.getElementById(dialogID);
+    dialog.showModal();
+  });
+  document.body.addEventListener("dialogClose", function(evt){
+    var dialogID = evt.detail.value;
+    var dialog = document.getElementById(dialogID);
+    dialog.close();
+  });
+</script>
+</html>

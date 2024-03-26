@@ -1,0 +1,40 @@
+<!-- Cats create html for htmx -->
+<dialog id="editCatDialog">
+  {{ if eq .EditType "create" }}
+  <form hx-post="/cat" hx-target="#addcats" hx-swap="beforebegin">
+  {{ else }}
+  <form hx-put="/cat/{{ .Cat.ID }}" hx-target="tr[key='{{ .Cat.ID }}']" hx-swap="outerHTML">
+  {{ end }}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ .PageTitle }}</h5>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="name">Name</label>
+          {{ if .Cat }}
+          <input type="text" class="form-control" id="name" name="name" required value="{{ .Cat.Name }}">
+          {{ else }}
+          <input type="text" class="form-control" id="name" name="name" required>
+          {{ end }}
+        </div>
+        <div class="form-group">
+          <label for="breed">Breed</label>
+          {{ if .Cat }}
+          <input type="text" class="form-control" id="breed" name="breed" required value="{{ .Cat.Breed }}">
+          {{ else }}
+          <input type="text" class="form-control" id="breed" name="breed" required>
+          {{ end }}
+        </div>
+      </div>
+      <div class="modal-footer">
+        {{ if eq .EditType "create" }}
+        <button type="submit" class="btn btn-primary">Create</button>
+        {{ else }}
+        <button type="submit" class="btn btn-primary">Update</button>
+        {{ end }}
+        <button type="button" class="btn btn-secondary" hx-swap="delete" hx-target="#editCatDialog" hx-get="">Cancel</button>
+      </div>
+    </div>
+  </form>
+</dialog>

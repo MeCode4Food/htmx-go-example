@@ -1,0 +1,24 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Breed</th>
+      <th>ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range .Cats }}
+    <!-- to implement delete, have tr use a key on the attribute such as id? and have -->
+    <!-- cats.html also use the same key, it would be better to have it defined in one place -->
+    <!-- rather than on two files... -->
+    <!-- maybe tbody should call GET /cats or something. -->
+    <!-- and then, GET /cats and POST /cat can use the same cats.html template -->
+    <tr>
+      <td>{{ .Name }}</td>
+      <td>{{ .Breed }}</td>
+      <td>{{ .ID }}</td>
+    </tr>
+    {{ end }}
+    <tr id="addcats"></tr>
+  </tbody>
+</table>
