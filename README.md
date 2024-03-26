@@ -1,4 +1,4 @@
 # How to run
 
-> `make vendor`
-> `make run`
+* `make vendor`
+* `make run`
