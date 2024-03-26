@@ -4,7 +4,7 @@
   <td>{{ .Breed }}</td>
   <td>{{ .ID }}</td>
   <td>
-    <button class="btn btn-primary" hx-get="/cats/edit/{{ .ID }}" hx-target="#replaceMe" hx-swap="innerHTML">Open Dialog</button>
+    <button class="btn btn-primary" hx-get="/cats/edit/{{ .ID }}" hx-target="#replaceMe" hx-swap="innerHTML">Update</button>
     <button class="btn btn-danger" hx-confirm="Confirm delete cat {{ .ID}}?" hx-target="closest tr" hx-delete="/cat/{{ .ID }}">Delete</button>
   </td>
 </tr>
